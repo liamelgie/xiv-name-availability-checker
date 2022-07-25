@@ -5,17 +5,17 @@ export default function Result ({
     world,
     availability,
     isLoading,
-    isEmpty
+    isValid
 }: {
     world: string,
     availability: boolean,
     isLoading: boolean,
-    isEmpty: boolean
+    isValid: boolean
 }) {
     return (
         <div className={styles.container}>
             <div className={styles.symbol}>
-                { isEmpty ? <span className={styles.question}>&#63;</span>
+                { !isValid ? <span className={styles.question}>&#63;</span>
                     : isLoading ? <SpinnerRoundFilled size={15} thickness={100} speed={100} color="rgba(255, 191, 0, 1)" />
                     : availability
                         ? <span className={styles.cross}>&#10007;</span>

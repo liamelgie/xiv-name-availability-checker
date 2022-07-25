@@ -6,11 +6,11 @@ import worlds from '../public/worlds.json'
 export default function DataCenter ({
     datacenter,
     name,
-    isEmpty
+    isValid
 }: {
     datacenter: string
     name: string,
-    isEmpty: boolean
+    isValid: boolean
 }) {
     const { data, isLoading, isError } = useDataCenterAvailability(datacenter, name)
     const results = worlds[datacenter].map((world: string) => {
@@ -19,7 +19,7 @@ export default function DataCenter ({
             world={world} 
             availability={data ? data[datacenter][world] : true} 
             isLoading={isLoading} 
-            isEmpty={isEmpty} 
+            isValid={isValid} 
         />
     })
     return (

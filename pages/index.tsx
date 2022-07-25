@@ -2,18 +2,37 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import SearchBar from '../components/SearchBar'
+import ValidationMessage from '../components/ValidationMessage'
 import { useState } from 'react'
 import useDebounce from '../hooks/useDebounce'
 import DataCenter from '../components/DataCenter'
 
 const Home: NextPage = () => {
   const [ searchValue, setSearchValue ] = useState('')
-  const [ isEmpty, setIsEmpty] = useState(true)
+  const [ isEmpty, setIsEmpty ] = useState(true)
+  const [ isValid, setIsValid ] = useState(false)
+  const [ validationString, setValidationString ] = useState('')
+  const validateUserInput = (input: string) => {
+    if (input.length > 20 || input.split(' ').filter(word => word !== '').length !== 2 || !/^[a-zA-Z']{2,}\s[a-zA-Z']{2,}$/.test(input)) {
+      return false
+    } else {
+      return true
+    }
+  }
   const updateSearchValue = (newValue: string) => {
     setSearchValue(newValue)
     if (newValue.length > 0) {
-      setIsEmpty(false) 
+      setIsEmpty(false)
+      if (validateUserInput(newValue)) {
+        setIsValid(true)
+      } else {
+        setIsValid(false)
+        if (newValue.length > 20) setValidationString('Your character name cannot be more than 20 characters long.')
+        if (newValue.split(' ').filter(word => word !== '').length !== 2)  setValidationString('Your character name must contain a first and last name.')
+        if (/[-!$%^&*()_+|~=`{}\[\]:";<>?,.\/0-9]/g.test(newValue)) setValidationString('Your character name must only contain letters and apostrophes.')
+      }
     } else {
+      setIsValid(false)
       setIsEmpty(true)
     }
   }
@@ -23,7 +42,7 @@ const Home: NextPage = () => {
       <Head>
         <title>XIV Name Availibility Checker</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="" />
+        <meta name="description" content="Check name availability across every world in seconds." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
@@ -31,6 +50,9 @@ const Home: NextPage = () => {
           <div className={styles.headerWrapper}>
             <h1>XIV Name Availibility Checker</h1>
             <SearchBar value={searchValue} onChangeCallback={updateSearchValue} />
+            <ValidationMessage isVisible={!isValid && !isEmpty}>
+              {validationString}
+            </ValidationMessage>
           </div>
         </div>
       </header>
@@ -39,38 +61,38 @@ const Home: NextPage = () => {
           <div className={`${styles.regionContainer} ${styles.regionMedium}`}>
             <h2>Europe</h2>
             <div className={styles.dataCenterWrapper}>
-              <DataCenter datacenter={'Chaos'} name={debouncedSearchValue} isEmpty={isEmpty} />
-              <DataCenter datacenter={'Light'} name={debouncedSearchValue} isEmpty={isEmpty} />
+              <DataCenter datacenter={'Chaos'} name={debouncedSearchValue} isValid={isValid} />
+              <DataCenter datacenter={'Light'} name={debouncedSearchValue} isValid={isValid} />
             </div>
           </div>
           <div className={`${styles.regionContainer} ${styles.regionLarge}`}>
             <h2>North America</h2>
             <div className={styles.dataCenterWrapper}>
-              <DataCenter datacenter={'Aether'} name={debouncedSearchValue} isEmpty={isEmpty} />
-              <DataCenter datacenter={'Crystal'} name={debouncedSearchValue} isEmpty={isEmpty} />
-              <DataCenter datacenter={'Primal'} name={debouncedSearchValue} isEmpty={isEmpty} />
+              <DataCenter datacenter={'Aether'} name={debouncedSearchValue} isValid={isValid} />
+              <DataCenter datacenter={'Crystal'} name={debouncedSearchValue} isValid={isValid} />
+              <DataCenter datacenter={'Primal'} name={debouncedSearchValue} isValid={isValid} />
             </div>
           </div>
           <div className={`${styles.regionContainer} ${styles.regionSmall}`}>
             <h2>Oceania</h2>
             <div className={styles.dataCenterWrapper}>
-              <DataCenter datacenter={'Materia'} name={debouncedSearchValue} isEmpty={isEmpty} />
+              <DataCenter datacenter={'Materia'} name={debouncedSearchValue} isValid={isValid} />
             </div>
           </div>
           <div className={`${styles.regionContainer} ${styles.regionLarge}`}>
             <h2>Japan</h2>
             <div className={styles.dataCenterWrapper}>
-              <DataCenter datacenter={'Elemental'} name={debouncedSearchValue} isEmpty={isEmpty} />
-              <DataCenter datacenter={'Gaia'} name={debouncedSearchValue} isEmpty={isEmpty} />
-              <DataCenter datacenter={'Mana'} name={debouncedSearchValue} isEmpty={isEmpty} />
-              {/* <DataCenter datacenter={'Meteor'} name={debouncedSearchValue} isEmpty={isEmpty} /> */}
+              <DataCenter datacenter={'Elemental'} name={debouncedSearchValue} isValid={isValid} />
+              <DataCenter datacenter={'Gaia'} name={debouncedSearchValue} isValid={isValid} />
+              <DataCenter datacenter={'Mana'} name={debouncedSearchValue} isValid={isValid} />
+              {/* <DataCenter datacenter={'Meteor'} name={debouncedSearchValue} isValid={isValid} /> */}
             </div>
           </div>
         </div>
       </main>
 
       <footer className={styles.footer}>
-        <span>Built by <a href={'https://github.com/liamelgie'}>Liam Elgie</a> - <a href={'https://eu.finalfantasyxiv.com/lodestone/character/35644156/'}>Cinnamon Swirl (Cerberus)</a></span>
+        <span>Built by <a target={'_parent'} href={'https://github.com/liamelgie'}>Liam Elgie</a> - <a target={'_parent'} href={'https://eu.finalfantasyxiv.com/lodestone/character/35644156/'}>Cinnamon Swirl (Cerberus)</a></span>
       </footer>
     </div>
   )
