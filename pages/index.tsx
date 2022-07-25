@@ -111,7 +111,7 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        <span>Built by <a target={'_blank'} href={'https://github.com/liamelgie'}>Liam Elgie</a> - <a target={'_blank'} href={'https://eu.finalfantasyxiv.com/lodestone/character/35644156/'}>Cinnamon Swirl (Cerberus)</a></span>
+        <span>Built by <a target={'_blank'} rel="noreferrer" href={'https://github.com/liamelgie'}>Liam Elgie</a> - <a target={'_blank'} rel="noreferrer" href={'https://eu.finalfantasyxiv.com/lodestone/character/35644156/'}>Cinnamon Swirl (Cerberus)</a></span>
       </footer>
     </div>
   )

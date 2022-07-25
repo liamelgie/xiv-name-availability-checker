@@ -25,7 +25,7 @@ export default function Result ({
                 }</div>
             <span className={styles.world}>
                 {lodestoneID 
-                    ? <a target='_blank' href={`https://eu.finalfantasyxiv.com/lodestone/character/${lodestoneID}`}>{world}</a>
+                    ? <a target='_blank' rel="noreferrer" href={`https://eu.finalfantasyxiv.com/lodestone/character/${lodestoneID}`}>{world}</a>
                     : `${world}`
                 }
             </span>
