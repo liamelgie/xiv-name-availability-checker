@@ -19,7 +19,8 @@ export default function DataCenter ({
             world={world} 
             availability={data ? data[datacenter][world] : true} 
             isLoading={isLoading} 
-            isValid={isValid} 
+            isValid={isValid}
+            lodestoneID={data ? data[datacenter][world] ? data[datacenter][world].id : null : null}
         />
     })
     return (

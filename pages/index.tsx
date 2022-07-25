@@ -61,6 +61,7 @@ const Home: NextPage = () => {
         <title>XIV Name Availability Checker</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="description" content="Check character name availability across every world in seconds." />
+        <meta name='robots' content='nofollow' />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
@@ -110,7 +111,7 @@ const Home: NextPage = () => {
       </main>
 
       <footer className={styles.footer}>
-        <span>Built by <a target={'_parent'} href={'https://github.com/liamelgie'}>Liam Elgie</a> - <a target={'_parent'} href={'https://eu.finalfantasyxiv.com/lodestone/character/35644156/'}>Cinnamon Swirl (Cerberus)</a></span>
+        <span>Built by <a target={'_blank'} href={'https://github.com/liamelgie'}>Liam Elgie</a> - <a target={'_blank'} href={'https://eu.finalfantasyxiv.com/lodestone/character/35644156/'}>Cinnamon Swirl (Cerberus)</a></span>
       </footer>
     </div>
   )

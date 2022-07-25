@@ -3,7 +3,10 @@ import fetch from 'cross-fetch'
 
 export interface DataCenterAvailability {
   [key: string]: {
-    [key: string]: boolean
+    [key: string]: {
+      unavailable: boolean,
+      id: string
+    }
   }
 }
 
@@ -46,7 +49,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<DataCenterAvaila
   const dataCenterResults: DataCenterAvailability = { [dc as string]: {} }
   for (const result of data.Results) {
     if (result.Name.toLowerCase() === name.toLowerCase().replace('+',' ')) {
-      dataCenterResults[dc as string][result.Server] = true
+      dataCenterResults[dc as string][result.Server] = { unavailable: true, id: result.ID}
     }
   }
   return res.status(200).json(dataCenterResults)
