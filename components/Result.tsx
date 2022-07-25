@@ -23,7 +23,12 @@ export default function Result ({
                         ? <span className={styles.cross}>&#10007;</span>
                         : <span className={styles.tick}>&#10003;</span>
                 }</div>
-            <span className={styles.world}><a target='_blank' href={`https://eu.finalfantasyxiv.com/lodestone/character/${lodestoneID}`}>{world}</a></span>
+            <span className={styles.world}>
+                {lodestoneID 
+                    ? <a target='_blank' href={`https://eu.finalfantasyxiv.com/lodestone/character/${lodestoneID}`}>{world}</a>
+                    : `${world}`
+                }
+            </span>
         </div>
     )
 }
