@@ -42,11 +42,12 @@ export default async (req: NextApiRequest, res: NextApiResponse<DataCenterAvaila
   const name: string = req.query.param[1] as string
   const apiRes = await fetch(`https://xivapi.com/character/search?name=${name}&server=_dc_${dc}`)
   if (!apiRes.ok) return res.status(503)
-
   const data = await apiRes.json() as CharacterLookupResponse
   const dataCenterResults: DataCenterAvailability = { [dc as string]: {} }
   for (const result of data.Results) {
-    dataCenterResults[dc as string][result.Server] = true
+    if (result.Name.toLowerCase() === name.toLowerCase().replace('+',' ')) {
+      dataCenterResults[dc as string][result.Server] = true
+    }
   }
   return res.status(200).json(dataCenterResults)
 }
