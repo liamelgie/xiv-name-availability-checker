@@ -10,7 +10,7 @@ export default function ValidationMessage({isVisible, children}: ValidationMessa
         <div className={styles.container}>
             {isVisible && 
             <span className={styles.message}>
-                <span className={styles.warningIcon} >&#x26A0;</span>
+                <div className={styles.warningIcon} >&#x26A0;</div>
                 {children}
             </span>}
         </div>
