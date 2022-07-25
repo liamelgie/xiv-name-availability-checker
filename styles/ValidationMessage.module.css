@@ -1,0 +1,18 @@
+.container {
+    color: black;
+    width: 60%;
+    position: absolute;
+    margin: 20px auto;
+    left: 0; 
+    right: 0; 
+    text-align: center;
+}
+
+.message {
+    font-size: 11pt;
+}
+
+.warningIcon {
+    color: rgba(255, 191, 0, 1);
+    font-size: 16pt;
+}
