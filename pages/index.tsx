@@ -6,12 +6,24 @@ import ValidationMessage from '../components/ValidationMessage'
 import { useState } from 'react'
 import useDebounce from '../hooks/useDebounce'
 import DataCenter from '../components/DataCenter'
+import useDetectDarkMode from '../hooks/useDetectDarkMode'
 
 const Home: NextPage = () => {
   const [ searchValue, setSearchValue ] = useState('')
   const [ isEmpty, setIsEmpty ] = useState(true)
   const [ isValid, setIsValid ] = useState(false)
   const [ validationString, setValidationString ] = useState('')
+
+  const [ theme, setTheme ] = useState('light')
+  const onSelectTheme = (theme: string) => {
+    setTheme(theme)
+    if (theme === 'dark')
+      document.body.classList.add('dark-mode')
+    else
+      document.body.classList.remove('dark-mode')
+  }
+  useDetectDarkMode(onSelectTheme)
+
   const validateUserInput = (input: string) => {
     if (input.length > 20 || input.split(' ').filter(word => word !== '').length !== 2 || !/^[a-zA-Z']{2,}\s[a-zA-Z']{2,}$/.test(input)) {
       return false
@@ -27,6 +39,7 @@ const Home: NextPage = () => {
         setIsValid(true)
       } else {
         setIsValid(false)
+        if (newValue.split(' ')[0].length < 3 || newValue.split(' ')[1].length < 3) setValidationString('Your first and last name must be at least 2 characters long.')
         if (newValue.length > 20) setValidationString('Your character name cannot be more than 20 characters long.')
         if (newValue.split(' ').filter(word => word !== '').length !== 2)  setValidationString('Your character name must contain a first and last name.')
         if (/[-!$%^&*()_+|~=`{}\[\]:";<>?,.\/0-9]/g.test(newValue)) setValidationString('Your character name must only contain letters and apostrophes.')
@@ -40,15 +53,15 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>XIV Name Availibility Checker</title>
+        <title>XIV Name Availability Checker</title>
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="Check name availability across every world in seconds." />
+        <meta name="description" content="Check character name availability across every world in seconds." />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header>
         <div className={styles.headerContainer}>
           <div className={styles.headerWrapper}>
-            <h1>XIV Name Availibility Checker</h1>
+            <h1>XIV Name Availability Checker</h1>
             <SearchBar value={searchValue} onChangeCallback={updateSearchValue} />
             <ValidationMessage isVisible={!isValid && !isEmpty}>
               {validationString}

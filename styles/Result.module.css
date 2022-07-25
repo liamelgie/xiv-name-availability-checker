@@ -1,5 +1,5 @@
 .container {
-    color: black;
+    color: var(--text-color);
     display: grid;
     grid-template-columns: 4fr 6fr;
 }

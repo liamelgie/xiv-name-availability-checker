@@ -1,9 +1,29 @@
+:root {
+  --primary-heading-color: rgb(147,112,219);
+  --secondary-heading-color: rgb(136,120,195);
+  --background-color: rgb(255, 255, 255);
+  --text-color: rgb(0, 0, 0);
+  --region-border: rgb(230, 230, 230);
+  --region-background: rgb(250, 250, 250);
+}
+
+.dark-mode {
+  --primary-heading-color: rgb(10, 223, 194);
+  --secondary-heading-color: rgb(24, 211, 186);
+  --background-color: rgb(36, 36, 36);
+  --text-color: #fff;
+  --region-border: rgb(15, 15, 15);
+  --region-background: rgb(40, 40, 40);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 a {
