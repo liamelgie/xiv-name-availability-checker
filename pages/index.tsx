@@ -39,7 +39,12 @@ const Home: NextPage = () => {
         setIsValid(true)
       } else {
         setIsValid(false)
-        if (newValue.split(' ')[0].length < 3 || newValue.split(' ')[1].length < 3) setValidationString('Your first and last name must be at least 2 characters long.')
+        if (newValue.split(' ')[0]) {
+          if (newValue.split(' ')[0].length < 2) setValidationString('Your first and last name must be at least 2 characters long.')
+        }
+        if (newValue.split(' ')[1]) {
+          if (newValue.split(' ')[1].length < 2) setValidationString('Your first and last name must be at least 2 characters long.')
+        }
         if (newValue.length > 20) setValidationString('Your character name cannot be more than 20 characters long.')
         if (newValue.split(' ').filter(word => word !== '').length !== 2)  setValidationString('Your character name must contain a first and last name.')
         if (/[-!$%^&*()_+|~=`{}\[\]:";<>?,.\/0-9]/g.test(newValue)) setValidationString('Your character name must only contain letters and apostrophes.')
