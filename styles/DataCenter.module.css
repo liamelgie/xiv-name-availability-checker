@@ -1,0 +1,10 @@
+.container {
+    color: pink;
+    width: 200px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.container h3 {
+    text-align: center;
+}
